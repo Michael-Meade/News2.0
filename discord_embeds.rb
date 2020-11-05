@@ -1,4 +1,5 @@
 require_relative 'news'
+require 'metainspector'
 h =  { 
     "content" => " **Bleeping Computer**",
         "embed" => {
@@ -10,8 +11,7 @@ h =  {
         }
 
 embeds = h["embed"]
-
-out = Reader.new("1").info
+out = Reader.new(id).info
 list = ""
 out.each do |m|
     embeds["title"]            = m[0].to_s
@@ -20,6 +20,11 @@ out.each do |m|
 end
 h["embed"]  =  embeds
 
-
-
-puts h.to_json
+page = MetaInspector.new(h["embed"]["url"])
+event.send_embed("") do |embed|
+    embed.title       = h["embed"]["title"]
+    embed.url         = h["embed"]["url"]
+    embed.description = h["embed"]["description"].gsub(/<\/?[^>]*>/, "")
+    embed.footer = Discordrb::Webhooks::EmbedFooter.new(text: "footer text", icon_url: "https://cdn.discordapp.com/embed/avatars/0.png")
+    embed.image = Discordrb::Webhooks::EmbedImage.new(url: page.meta_tags["property"]["og:image"].shift.to_s)
+end
