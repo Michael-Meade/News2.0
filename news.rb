@@ -56,7 +56,6 @@ class Lists
         j.delete(id)
         array = j.to_a
         array.each do |l|
-            p l
             l[0] = i.to_s
             i += 1
         end
