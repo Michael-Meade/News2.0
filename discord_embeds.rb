@@ -1,5 +1,6 @@
 require_relative 'news'
 require 'metainspector'
+require 'discordrb'
 h =  { 
     "content" => " **Bleeping Computer**",
         "embed" => {
