@@ -82,17 +82,3 @@ class NewSites
         end
     end
 end
-
-embeds = h["embed"]
-
-
-# Enter the id where the "1" is
-out = Reader.new("1").info
-list = ""
-out.each do |m|
-    embeds["title"]            = m[0].to_s
-    embeds["url"]              = m[1].to_s
-    embeds["description"]      = m[2].to_s
-end
-h["embed"]  =  embeds
-puts h.to_json
