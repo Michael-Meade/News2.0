@@ -18,3 +18,6 @@ It allows users to add or remove urls from the sites.json.
 
 
 `gem install nokogiri`
+
+
+`gem install discordrb`
